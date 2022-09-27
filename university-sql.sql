@@ -3,16 +3,16 @@ USE universidad;
 
 CREATE TABLE IF NOT EXISTS estudiante(
     carne VARCHAR(9) NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    correo VARCHAR(30) NOT NULL,
     edad INT NOT NULL,
     PRIMARY KEY (carne)
 );
 
 CREATE TABLE IF NOT EXISTS curso(
-    codigo VARCHAR(100) NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
+    codigo VARCHAR(5) NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
     creditos INT NOT NULL,
     PRIMARY KEY (codigo)
 );
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS curso(
 CREATE TABLE IF NOT EXISTS asignacion(
     id INT AUTO_INCREMENT NOT NULL,
     carne VARCHAR(9) NOT NULL,
-    curso VARCHAR(100) NOT NULL,
+    curso VARCHAR(30) NOT NULL,
     fecha DATE NOT NULL,
     nota INT NOT NULL,
     estado BOOLEAN NOT NULL,
@@ -31,18 +31,25 @@ CREATE TABLE IF NOT EXISTS asignacion(
 );
 
 CREATE TABLE IF NOT EXISTS profesor(
-    colegiado VARCHAR(100) NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    carne VARCHAR(100) NOT NULL,
-    titulo VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL,
+    colegiado VARCHAR(9) NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    apellido VARCHAR(30) NOT NULL,
+    carne VARCHAR(9) NOT NULL,
+    titulo VARCHAR(30) NOT NULL,
+    correo VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL,
     PRIMARY KEY (colegiado)
 );
 
+CREATE TABLE IF NOT EXISTS imparte(
+	curso VARCHAR(5) NOT NULL,
+    profesor VARCHAR(9) NOT NULL,
+    FOREIGN KEY (curso) REFERENCES curso(codigo),
+    FOREIGN KEY (profesor) REFERENCES profesor(colegiado),
+    PRIMARY KEY (curso, profesor)
+);
 CREATE TABLE IF NOT EXISTS administrador(
-    codigo VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL,
+    codigo VARCHAR(10) NOT NULL,
+    password VARCHAR(20) NOT NULL,
     PRIMARY KEY (codigo)
 );
